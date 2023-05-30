@@ -1,3 +1,40 @@
+<?php
+
+if($_SERVER["REQUEST_METHOD"] === "POST" ){ 
+
+    if(isset($_POST['firstName']) && trim($_POST['firstName']) === '') {
+        $errors[] = "The first name is required";
+    }
+
+    if(isset($_POST['lastName']) && trim($_POST['lastName']) === '') {
+        $errors[] = "The last name is required";
+    }
+
+    if(isset($_POST['email']) && trim($_POST['email']) === '' && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)==false) {
+        $errors[] = "Mail is required";
+    }
+
+    if(isset($_POST['phone']) && $_POST['phone'] === '') {
+        $errors[] = "Phone is required";
+    }
+
+    if(isset($_POST['subject']) && trim($_POST['subject']) === '') {
+        $errors[] = "Subject is required";
+    }
+
+    if(isset($_POST['message']) && trim($_POST['message']) === '') {
+        $errors[] = "Message is required";
+    }
+
+    if (!empty($errors)) {
+        require 'error.php';
+        die();
+    }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
